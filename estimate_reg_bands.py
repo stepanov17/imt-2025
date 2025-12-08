@@ -629,47 +629,46 @@ def estimate_confidence_band(n: int,
 
 
 # ==================== USAGE EXAMPLES ====================
-
-
-if __name__ == "__main__":
-
-    # Parameters
-    n0 = 35
-    n = 100
-    h = 1
-    p0 = 0.95
-    n_sim = 50000
-    k_low = 1.0
-    k_high = 3.0
-
-    # Example 1: AR(1) with normal white noise
-    print("Example 1: AR(1) with normal white noise")
-    phi = 0.5
-    sigma_w = 1.0
-
-    noise_generator_ar1 = AR1NoiseGenerator(phi, sigma_w)
-    cov_calculator_ar1 = AR1CovarianceCalculator(phi, sigma_w)
-
-    k_ar1 = compute_k(
-        n0, n, h, noise_generator_ar1, cov_calculator_ar1,
-        p0, n_sim, k_low, k_high
-    )
-    print(f"K for AR(1) with phi={phi}, sigma_w={sigma_w}: {k_ar1}")
-
-    # Example 2: Colored noise
-    print("\nExample 5: Colored noise (pink noise, 1/f)")
-    colored_noise_gen = ColoredNoiseGenerator(
-        a=1., scale=1., fs=1., target_std=1., f_min=0.01)
-    colored_noise_cov = ColoredNoiseCovarianceCalculator(
-        a=1., scale=1., fs=1., target_std=1., f_min=0.01, simulation_length=500000)
-
-    try:
-        k_colored = compute_k(
-            n0, n, h,
-            noise_generator=colored_noise_gen,
-            cov_calculator=colored_noise_cov,
-            p0=p0, n_sim=500000, k_low=k_low, k_high=4.
-        )
-        print(f"K for pink noise: {k_colored}")
-    except Exception as e:
-        print(f"Error computing K for colored noise: {e}")
+#
+# if __name__ == "__main__":
+# 
+#     # Parameters
+#     n0 = 35
+#     n = 100
+#     h = 1
+#     p0 = 0.95
+#     n_sim = 50000
+#     k_low = 1.0
+#     k_high = 3.0
+# 
+#     # Example 1: AR(1) with normal white noise
+#     print("Example 1: AR(1) with normal white noise")
+#     phi = 0.5
+#     sigma_w = 1.0
+# 
+#     noise_generator_ar1 = AR1NoiseGenerator(phi, sigma_w)
+#     cov_calculator_ar1 = AR1CovarianceCalculator(phi, sigma_w)
+# 
+#     k_ar1 = compute_k(
+#         n0, n, h, noise_generator_ar1, cov_calculator_ar1,
+#         p0, n_sim, k_low, k_high
+#     )
+#     print(f"K for AR(1) with phi={phi}, sigma_w={sigma_w}: {k_ar1}")
+# 
+#     # Example 2: Colored noise
+#     print("\nExample 5: Colored noise (pink noise, 1/f)")
+#     colored_noise_gen = ColoredNoiseGenerator(
+#         a=1., scale=1., fs=1., target_std=1., f_min=0.01)
+#     colored_noise_cov = ColoredNoiseCovarianceCalculator(
+#         a=1., scale=1., fs=1., target_std=1., f_min=0.01, simulation_length=500000)
+# 
+#     try:
+#         k_colored = compute_k(
+#             n0, n, h,
+#             noise_generator=colored_noise_gen,
+#             cov_calculator=colored_noise_cov,
+#             p0=p0, n_sim=500000, k_low=k_low, k_high=4.
+#         )
+#         print(f"K for pink noise: {k_colored}")
+#     except Exception as e:
+#         print(f"Error computing K for colored noise: {e}")
