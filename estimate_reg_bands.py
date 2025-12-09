@@ -619,6 +619,7 @@ def estimate_confidence_band(n: int,
         raise ValueError("n0 > n")
     u_array, x_mat, r_inv, a_mat, variance = compute_uncertainties(n0, n, h, cov_calculator)
     beta_hat = a_mat @ (x_mat.T @ r_inv @ y)
+    print(f"est.: beta_0 = {beta_hat[0]:.3f}, beta_1 = {beta_hat[1]:.3f}")
     x = np.arange(0, n * h, h)
     y_hat = beta_hat[0] + beta_hat[1] * x
 
@@ -672,3 +673,4 @@ def estimate_confidence_band(n: int,
 #         print(f"K for pink noise: {k_colored}")
 #     except Exception as e:
 #         print(f"Error computing K for colored noise: {e}")
+
